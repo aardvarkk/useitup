@@ -2,9 +2,9 @@
 #define FOOD_TYPES
 
 // Massive enum containing every possible ingredient
-namespace Food
-{
-  enum Type
+//namespace Food
+//{
+  enum FoodType
   {
     Rhubarb,
     ChineseCabbage,
@@ -19,6 +19,6 @@ namespace Food
     Lettuce,
     Chard
   };
-}
+//}
 
 #endif
