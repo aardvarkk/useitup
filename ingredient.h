@@ -1,7 +1,7 @@
 #ifndef INGREDIENT
 #define INGREDIENT
 
-#include <vector>
+#include <set>
 
 #include "food_types.h"
 #include "measure_types.h"
@@ -21,12 +21,18 @@ public:
   Ingredient(double mass, FoodType type);
   Ingredient(double number, MeasureType units, FoodType type);
 
+  // Required for ordering the set
+  bool operator<(Ingredient const& i) const;
+
 protected:
 
   double mass;
   FoodType type;
+
+  // Needs access to check masses
+  friend class Recipe;
 };
 
-typedef std::vector<Ingredient> Ingredients;
+typedef std::set<Ingredient> Ingredients;
 
 #endif

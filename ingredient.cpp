@@ -21,3 +21,8 @@ Ingredient::Ingredient(double number, MeasureType units, FoodType type) :
   type(type)
 {
 }
+
+bool Ingredient::operator<(Ingredient const& i) const
+{
+  return type < i.type;
+}

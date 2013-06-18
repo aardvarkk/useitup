@@ -2,6 +2,7 @@
 #define RECIPE
 
 #include <string>
+#include <vector>
 
 #include "ingredient.h"
 
@@ -13,6 +14,7 @@ class Recipe
 public:
 
   void Add(Ingredient ingredient);
+  bool Possible(Ingredients supplied) const;
 
 protected:
 
