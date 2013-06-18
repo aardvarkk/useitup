@@ -16,14 +16,15 @@ class Recipe
 {
 public:
 
-  void   Add(Ingredient const& ingredient);
-  double Possible(Ingredients const& on_hand, Ingredients const& pantry) const;
+  void   Add(RecipeIngredient const& ingredient);
+  double Possible(AvailableIngredients const& on_hand, AvailableIngredients const& pantry) const;
+  static double GetAvailableAmount(RecipeIngredient const& r, AvailableIngredients const& ai);
 
 protected:
 
-  std::string name;
-  Ingredients ingredients;
-  Steps       steps;
+  std::string       name;
+  RecipeIngredients ingredients;
+  Steps             steps;
 };
 
 typedef std::vector<Recipe> Recipes;

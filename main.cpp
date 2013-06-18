@@ -10,13 +10,13 @@ typedef std::vector<ScoredRecipe> ScoredRecipes;
 int main(int argc, char* argv[])
 {
   // Generate a set of on-hand ingredients
-  Ingredients on_hand;
-  on_hand.insert(Ingredient(5, Large, Potato));
+  AvailableIngredients on_hand;
+  on_hand.insert(AvailableIngredient(5, Large, Potato));
 
   // Generate stuff that's in the pantry
-  Ingredients pantry;
-  pantry.insert(Ingredient(Egg));
-  pantry.insert(Ingredient(Water));
+  AvailableIngredients pantry;
+  pantry.insert(AvailableIngredient(Egg));
+  pantry.insert(AvailableIngredient(Water));
 
   // Compare against a big list of recipes
   Recipes recipes;
@@ -24,17 +24,17 @@ int main(int argc, char* argv[])
   // Create some test recipes
 
   Recipe r1;
-  r1.Add(Ingredient(3, 4, Large, Potato));
-  r1.Add(Ingredient(5, Large, Egg));
-  r1.Add(Ingredient(1, Tablespoon, Water));
+  r1.Add(RecipeIngredient(3, 4, Large, Potato));
+  r1.Add(RecipeIngredient(5, 5, Large, Egg));
+  r1.Add(RecipeIngredient(1, 1, Tablespoon, Water));
   recipes.push_back(r1);
 
   Recipe r2;
-  r2.Add(Ingredient(6, 7, Large, Potato));
+  r2.Add(RecipeIngredient(6, 7, Large, Potato));
   recipes.push_back(r2);
 
   Recipe r3;
-  r3.Add(Ingredient(5, Large, Potato));
+  r3.Add(RecipeIngredient(5, 5, Large, Potato));
   recipes.push_back(r3);
 
   // Go through all recipes and eliminate anything that's impossible

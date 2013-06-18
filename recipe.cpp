@@ -3,13 +3,23 @@
 #include "recipe.h"
 
 // Add an ingredient to a recipe
-void Recipe::Add(Ingredient const& ingredient)
+void Recipe::Add(RecipeIngredient const& ingredient)
 {
   ingredients.insert(ingredient);
 }
 
+double Recipe::GetAvailableAmount(RecipeIngredient const& r, AvailableIngredients const& ai)
+{
+  for (auto a = ai.cbegin(); a != ai.cend(); ++a) {
+    if (r.type == a->type) {
+      return a->mass;
+    }
+  }
+  return 0;
+}
+
 // See if a given recipe is possible with the supplied ingredients
-double Recipe::Possible(Ingredients const& on_hand, Ingredients const& pantry) const
+double Recipe::Possible(AvailableIngredients const& on_hand, AvailableIngredients const& pantry) const
 {
   double score = 0;
 
@@ -17,21 +27,22 @@ double Recipe::Possible(Ingredients const& on_hand, Ingredients const& pantry) c
   for (auto i = ingredients.cbegin(); i != ingredients.cend(); ++i) {
     
     // Search both on hand and pantry
-    auto o = on_hand.find(*i);
-    auto p = pantry.find(*i);
+    double amt_on_hand   = GetAvailableAmount(*i, on_hand);
+    double amt_in_pantry = GetAvailableAmount(*i, pantry);
     
     // Ingredient should be either on hand or in pantry -- not both!
-    if (o != on_hand.cend() && p != pantry.cend()) {
+    if (amt_on_hand && amt_in_pantry) {
       throw IngredientMembership();
     }
 
     // Ingredient not available at all
-    if (o == on_hand.cend() && p == pantry.cend()) {
+    if (!amt_on_hand && !amt_in_pantry) {
       return 0;
     }
 
     // Ingredient is in pantry
-    if (p != pantry.cend()) {
+    // Pantry items are always unlimited
+    if (amt_in_pantry) {
       // Don't add to score
       continue;
     } 
@@ -39,12 +50,13 @@ double Recipe::Possible(Ingredients const& on_hand, Ingredients const& pantry) c
     else {
       
       // Ingredient has inadequate supply on hand
-      if (o->max_mass < i->min_mass) {
+      if (amt_on_hand < i->min_mass) {
         return 0;
       }
 
       // Add to score because we're using up our on-hand ingredients
-      score += std::min(o->max_mass, i->max_mass);
+      // We can use up to the max amount of the recipe ingredient
+      score += std::min(amt_on_hand, i->max_mass);
     }
   }
 
