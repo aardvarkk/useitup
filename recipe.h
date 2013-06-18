@@ -16,7 +16,7 @@ class Recipe
 {
 public:
 
-  void Add(Ingredient const& ingredient);
+  void   Add(Ingredient const& ingredient);
   double Possible(Ingredients const& on_hand, Ingredients const& pantry) const;
 
 protected:

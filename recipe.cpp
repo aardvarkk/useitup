@@ -39,12 +39,12 @@ double Recipe::Possible(Ingredients const& on_hand, Ingredients const& pantry) c
     else {
       
       // Ingredient has inadequate supply on hand
-      if (o->mass < i->mass) {
+      if (o->max_mass < i->min_mass) {
         return 0;
       }
 
       // Add to score because we're using up our on-hand ingredients
-      score += std::min(o->mass, i->mass);
+      score += std::min(o->max_mass, i->max_mass);
     }
   }
 

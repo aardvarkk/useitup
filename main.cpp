@@ -24,13 +24,13 @@ int main(int argc, char* argv[])
   // Create some test recipes
 
   Recipe r1;
-  r1.Add(Ingredient(4, Large, Potato));
+  r1.Add(Ingredient(3, 4, Large, Potato));
   r1.Add(Ingredient(5, Large, Egg));
   r1.Add(Ingredient(1, Tablespoon, Water));
   recipes.push_back(r1);
 
   Recipe r2;
-  r2.Add(Ingredient(2, Large, Potato));
+  r2.Add(Ingredient(6, 7, Large, Potato));
   recipes.push_back(r2);
 
   Recipe r3;

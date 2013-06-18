@@ -19,14 +19,17 @@ public:
 
   Ingredient(FoodType type);
   Ingredient(double mass, FoodType type);
-  Ingredient(double number, MeasureType units, FoodType type);
+  Ingredient(double qty, MeasureType units, FoodType type);
+  Ingredient(double min_mass, double max_mass, FoodType type);
+  Ingredient(double min_qty, double max_qty, MeasureType units, FoodType type);
 
   // Required for ordering the set
   bool operator<(Ingredient const& i) const;
 
 protected:
 
-  double mass;
+  double   min_mass;
+  double   max_mass;
   FoodType type;
 
   // Needs access to check masses
