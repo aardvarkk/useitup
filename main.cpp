@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
   // Generate a set of on-hand ingredients
   Ingredients on_hand;
-  on_hand.insert(Ingredient(4, Large, Potato));
+  on_hand.insert(Ingredient(5, Large, Potato));
 
   // Generate stuff that's in the pantry
   Ingredients pantry;
@@ -24,18 +24,14 @@ int main(int argc, char* argv[])
   r.Add(Ingredient(1, Tablespoon, Water));
   recipes.push_back(r);
 
-  // SCORE recipes in the search results, and sort by the score
-  // Some recipes may not have a score, because we don't have the ingredients for them?
-
-  // Combine the ingredients with the pantry
-  Ingredients combined;
-  combined.insert(on_hand.begin(), on_hand.end());
-  combined.insert(pantry.begin(), pantry.end());
-
   // Go through all recipes and eliminate anything that's impossible
+  // Also, store the scores of anything possible
   Recipes possible;
+  std::vector<double> scores;
   for (auto i = recipes.cbegin(); i != recipes.cend(); ++i) {
-    if (i->Possible(combined)) {
+    double s = i->Possible(on_hand, pantry);
+    if (s > 0) {
+      scores.push_back(s);
       possible.push_back(*i);
     }
   }

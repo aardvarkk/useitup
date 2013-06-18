@@ -1,6 +1,7 @@
 #ifndef RECIPE
 #define RECIPE
 
+#include <exception>
 #include <string>
 #include <vector>
 
@@ -9,12 +10,14 @@
 typedef std::string Step;
 typedef std::vector<Step> Steps;
 
+class IngredientMembership : public std::exception {};
+
 class Recipe
 {
 public:
 
-  void Add(Ingredient ingredient);
-  bool Possible(Ingredients supplied) const;
+  void Add(Ingredient const& ingredient);
+  double Possible(Ingredients const& on_hand, Ingredients const& pantry) const;
 
 protected:
 

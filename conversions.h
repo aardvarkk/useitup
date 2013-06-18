@@ -6,10 +6,7 @@
 #include "measure_types.h"
 #include "food_types.h"
 
-class InvalidConversion : public std::exception
-{
-
-};
+class InvalidConversion : public std::exception {};
 
 class Conversions
 {
