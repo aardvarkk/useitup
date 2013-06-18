@@ -1,7 +1,11 @@
+#include <algorithm>
 #include <cstdlib>
 
 #include "ingredient.h"
 #include "recipe.h"
+
+typedef std::pair<Recipe, double> ScoredRecipe;
+typedef std::vector<ScoredRecipe> ScoredRecipes;
 
 int main(int argc, char* argv[])
 {
@@ -17,24 +21,38 @@ int main(int argc, char* argv[])
   // Compare against a big list of recipes
   Recipes recipes;
   
-  // Create a recipe
-  Recipe r;
-  r.Add(Ingredient(4, Large, Potato));
-  r.Add(Ingredient(5, Large, Egg));
-  r.Add(Ingredient(1, Tablespoon, Water));
-  recipes.push_back(r);
+  // Create some test recipes
+
+  Recipe r1;
+  r1.Add(Ingredient(4, Large, Potato));
+  r1.Add(Ingredient(5, Large, Egg));
+  r1.Add(Ingredient(1, Tablespoon, Water));
+  recipes.push_back(r1);
+
+  Recipe r2;
+  r2.Add(Ingredient(2, Large, Potato));
+  recipes.push_back(r2);
+
+  Recipe r3;
+  r3.Add(Ingredient(5, Large, Potato));
+  recipes.push_back(r3);
 
   // Go through all recipes and eliminate anything that's impossible
   // Also, store the scores of anything possible
-  Recipes possible;
-  std::vector<double> scores;
+  ScoredRecipes possible;
   for (auto i = recipes.cbegin(); i != recipes.cend(); ++i) {
     double s = i->Possible(on_hand, pantry);
     if (s > 0) {
-      scores.push_back(s);
-      possible.push_back(*i);
+      possible.push_back(std::make_pair(*i, s));;
     }
   }
+
+  // Sort the recipes by score
+  std::sort(
+    possible.begin(), 
+    possible.end(), 
+    [](ScoredRecipe const& r1, ScoredRecipe const& r2) { return r1.second > r2.second; }
+  );
 
   return EXIT_SUCCESS;
 }
