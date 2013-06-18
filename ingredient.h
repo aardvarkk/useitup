@@ -6,6 +6,9 @@
 #include "food_types.h"
 #include "measure_types.h"
 
+typedef std::set<class AvailableIngredient> AvailableIngredients;
+typedef std::set<class RecipeIngredient>    RecipeIngredients;
+
 class Amount
 {
 public:
@@ -58,16 +61,13 @@ public:
 
 protected:
 
-  double                     min_mass;
-  double                     max_mass;
-  bool                       optional;
-  std::set<RecipeIngredient> substitutes;
+  double            min_mass;
+  double            max_mass;
+  bool              optional;
+  RecipeIngredients substitutes;
 
   // Needs access to check masses
   friend class Recipe;
 };
-
-typedef std::set<AvailableIngredient> AvailableIngredients;
-typedef std::set<RecipeIngredient>    RecipeIngredients;
 
 #endif
