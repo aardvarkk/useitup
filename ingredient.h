@@ -58,9 +58,10 @@ public:
 
 protected:
 
-  double min_mass;
-  double max_mass;
-  bool   optional;
+  double                     min_mass;
+  double                     max_mass;
+  bool                       optional;
+  std::set<RecipeIngredient> substitutes;
 
   // Needs access to check masses
   friend class Recipe;
