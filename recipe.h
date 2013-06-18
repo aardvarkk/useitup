@@ -10,6 +10,10 @@ typedef std::vector<Step> Steps;
 
 class Recipe
 {
+public:
+
+  void Add(Ingredient ingredient);
+
 protected:
 
   std::string name;

@@ -21,6 +21,12 @@
     <ClCompile Include="ingredient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="recipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ingredient.h">
@@ -30,6 +36,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="recipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="measure_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conversions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

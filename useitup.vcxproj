@@ -60,12 +60,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="conversions.cpp" />
     <ClCompile Include="ingredient.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="recipe.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="conversions.h" />
     <ClInclude Include="ingredient.h" />
     <ClInclude Include="food_types.h" />
+    <ClInclude Include="measure_types.h" />
     <ClInclude Include="recipe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
