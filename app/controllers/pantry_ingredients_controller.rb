@@ -13,7 +13,7 @@ class PantryIngredientsController < ApplicationController
   end
 
   def destroy
-    PantryIngredient.where(:user_id => current_user, :ingredient_id => params[:id]).destroy_all
+    PantryIngredient.where(:user_id => current_user, :id => params[:id]).destroy_all
     redirect_to current_user
   end
   

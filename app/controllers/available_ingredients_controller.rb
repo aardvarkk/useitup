@@ -13,7 +13,7 @@ class AvailableIngredientsController < ApplicationController
   end
 
   def destroy
-    AvailableIngredient.where(:user_id => current_user, :ingredient_id => params[:id]).destroy_all
+    AvailableIngredient.where(:user_id => current_user, :id => params[:id]).destroy_all
     redirect_to current_user
   end
 

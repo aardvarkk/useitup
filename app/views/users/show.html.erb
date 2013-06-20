@@ -10,7 +10,7 @@
   <tr>
     <td><%= a.ingredient.name %></td>
     <td><%= a.amount %></td>
-    <td><%= button_to 'Remove', user_available_ingredient_path(current_user, a.ingredient.id), :method => :delete %></td>
+    <td><%= button_to 'Remove', user_available_ingredient_path(current_user, a.id), :method => :delete %></td>
   </tr>
   <% end %>
 </table>
@@ -24,7 +24,7 @@
   <% @pantry.each do |p| %>
   <tr>
     <td><%= p.ingredient.name %></td>
-    <td><%= button_to 'Remove', user_pantry_ingredient_path(current_user, p.ingredient.id), :method => :delete %></td>
+    <td><%= button_to 'Remove', user_pantry_ingredient_path(current_user, p.id), :method => :delete %></td>
   </tr>
   <% end %>
 </table>
