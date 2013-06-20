@@ -8,9 +8,16 @@
 </table>
 <%= link_to 'Add Ingredient' %>
 <h1>Pantry Ingredients</h1>
-<ul>
+<table>
+  <tr>
+    <th>Ingredient</th>
+    <th></th>
+  </tr>
   <% @pantry.each do |p| %>
-  <li><%= p.name %></li>
+  <tr>
+    <td><%= p.name %></td>
+    <td><%= button_to 'Remove', user_pantry_ingredient_path(current_user, p.id), :method => :delete %></td>
+  </tr>
   <% end %>
-</ul>
+</table>
 <%= link_to 'Add Ingredient', new_user_pantry_ingredient_path(current_user) %>
