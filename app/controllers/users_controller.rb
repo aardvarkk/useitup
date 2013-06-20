@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    @pantry = Ingredient.where(:id => current_user.pantry_ingredients.pluck(:ingredient_id))
+    @available = current_user.available_ingredients.includes(:ingredient)
+    @pantry = current_user.pantry_ingredients.includes(:ingredient)
   end
 
 end

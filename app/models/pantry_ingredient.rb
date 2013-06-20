@@ -1,6 +1,6 @@
 class PantryIngredient < ActiveRecord::Base
-  has_one :ingredient
-  has_one :user
+  belongs_to :ingredient
+  belongs_to :user
 
   attr_accessible :ingredient_id
 end

@@ -16,4 +16,5 @@ class PantryIngredientsController < ApplicationController
     PantryIngredient.where(:user_id => current_user, :ingredient_id => params[:id]).destroy_all
     redirect_to current_user
   end
+  
 end

@@ -1,0 +1,9 @@
+<%= link_to 'Back', current_user %>
+
+<%= form_tag user_available_ingredients_path(current_user) do %>
+  <%= label_tag :id, 'Ingredient' %><br />
+  <%= select_tag :id, options_from_collection_for_select(Ingredient.all, :id, :name) %><br />
+  <%= label_tag :amount, 'Amount (in grams)' %><br />
+  <%= text_field_tag :amount %><br />
+  <%= submit_tag 'Add Ingredient' %>
+<% end %>

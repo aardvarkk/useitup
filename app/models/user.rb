@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :available_ingredients
   has_many :pantry_ingredients
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

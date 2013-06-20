@@ -1,20 +1,15 @@
 Useitup::Application.routes.draw do
   
-  get "pantry_ingredients/create"
-
-  get "pantry_ingredients/new"
-
-  get "pantry_ingredients/destroy"
-
   devise_for :users
-
-  resources :users do
-    resources :pantry_ingredients, :only => [:new, :create, :destroy]
-  end
 
   match 'users/:id' => 'users#show'
 
   resources :ingredients
+
+  resources :users do
+    resources :available_ingredients, :only => [:new, :create, :destroy]
+    resources :pantry_ingredients, :only => [:new, :create, :destroy]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

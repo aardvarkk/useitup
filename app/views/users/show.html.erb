@@ -4,9 +4,17 @@
   <tr>
     <th>Ingredient</th>
     <th>Amount</th>
+    <th></th>
   </tr>
+  <% @available.each do |a| %>
+  <tr>
+    <td><%= a.ingredient.name %></td>
+    <td><%= a.amount %></td>
+    <td><%= button_to 'Remove', user_available_ingredient_path(current_user, a.ingredient.id), :method => :delete %></td>
+  </tr>
+  <% end %>
 </table>
-<%= link_to 'Add Ingredient' %>
+<%= link_to 'Add Ingredient', new_user_available_ingredient_path(current_user) %>
 <h1>Pantry Ingredients</h1>
 <table>
   <tr>
@@ -15,8 +23,8 @@
   </tr>
   <% @pantry.each do |p| %>
   <tr>
-    <td><%= p.name %></td>
-    <td><%= button_to 'Remove', user_pantry_ingredient_path(current_user, p.id), :method => :delete %></td>
+    <td><%= p.ingredient.name %></td>
+    <td><%= button_to 'Remove', user_pantry_ingredient_path(current_user, p.ingredient.id), :method => :delete %></td>
   </tr>
   <% end %>
 </table>
