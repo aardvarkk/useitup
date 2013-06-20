@@ -1,4 +1,11 @@
 Useitup::Application.routes.draw do
+  
+  devise_for :users
+
+  match 'users/:id' => 'user#show'
+
+  resources :ingredients
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +55,7 @@ Useitup::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'user#show'
 
   # See how all your routes lay out with "rake routes"
 
