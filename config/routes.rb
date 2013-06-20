@@ -1,8 +1,18 @@
 Useitup::Application.routes.draw do
   
+  get "pantry_ingredients/create"
+
+  get "pantry_ingredients/new"
+
+  get "pantry_ingredients/destroy"
+
   devise_for :users
 
-  match 'users/:id' => 'user#show'
+  resources :users do
+    resources :pantry_ingredients, :only => [:new, :create, :destroy]
+  end
+
+  match 'users/:id' => 'users#show'
 
   resources :ingredients
 
@@ -55,7 +65,7 @@ Useitup::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'user#show'
+  root :to => 'users#show'
 
   # See how all your routes lay out with "rake routes"
 
