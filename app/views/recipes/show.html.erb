@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @recipe.name %></h1>
-<h2><%= @recipe.user.email %></h2>
+<h2><%= link_to @recipe.user.email, @recipe.user %></h2>
 
 <h3>Ingredients</h3>
 <table>
