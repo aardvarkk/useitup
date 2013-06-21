@@ -1,27 +1,16 @@
 Useitup::Application.routes.draw do
   
-  resources :recipe_steps
-
-
-  resources :recipe_ingredients
-
-
-  resources :recipes
-
-
   devise_for :users
 
-  match 'users/:id' => 'users#show'
-
+  resources :available_ingredients, :only => [:new, :create, :destroy]
   resources :ingredients
-
-  resources :users do
-    resources :available_ingredients, :only => [:new, :create, :destroy]
-    resources :pantry_ingredients, :only => [:new, :create, :destroy]
-  end
-
-  resources :measure_types
   resources :measure_conversions
+  resources :measure_types
+  resources :pantry_ingredients, :only => [:new, :create, :destroy]
+  resources :recipes
+  resources :recipe_ingredients
+  resources :recipe_steps
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
