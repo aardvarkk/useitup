@@ -1,15 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @recipe.user.email %>
-</p>
+<h1><%= @recipe.name %></h1>
+<h2><%= @recipe.user.email %></h2>
 
-<p>
-  <b>Name:</b>
-  <%= @recipe.name %>
-</p>
-
+<h3>Ingredients</h3>
 <table>
   <tr>
     <th>Quantity</th>
@@ -24,6 +18,13 @@
   </tr>
 <% end %>
 </table>
+
+<h3>Steps</h3>
+<ol>
+<% @recipe.recipe_steps.each do |s| %>
+  <li><%= s.step %></li>
+<% end %>
+</ol>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>

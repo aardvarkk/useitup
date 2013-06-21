@@ -1,5 +1,8 @@
 Useitup::Application.routes.draw do
   
+  resources :recipe_steps
+
+
   resources :recipe_ingredients
 
 
