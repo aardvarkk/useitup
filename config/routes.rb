@@ -1,5 +1,8 @@
 Useitup::Application.routes.draw do
   
+  resources :recipes
+
+
   devise_for :users
 
   match 'users/:id' => 'users#show'
