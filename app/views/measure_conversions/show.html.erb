@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Measure type:</b>
+  <%= @measure_conversion.measure_type_id %>
+</p>
+
+<p>
+  <b>Ingredient:</b>
+  <%= @measure_conversion.ingredient_id %>
+</p>
+
+<p>
+  <b>Multiplier:</b>
+  <%= @measure_conversion.multiplier %>
+</p>
+
+
+<%= link_to 'Edit', edit_measure_conversion_path(@measure_conversion) %> |
+<%= link_to 'Back', measure_conversions_path %>

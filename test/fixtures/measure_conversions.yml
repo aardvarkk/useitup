@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  measure_type_id: 1
+  ingredient_id: 1
+  multiplier: 1.5
+
+two:
+  measure_type_id: 1
+  ingredient_id: 1
+  multiplier: 1.5

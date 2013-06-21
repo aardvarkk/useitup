@@ -12,6 +12,7 @@ Useitup::Application.routes.draw do
   end
 
   resources :measure_types
+  resources :measure_conversions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
