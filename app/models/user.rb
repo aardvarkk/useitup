@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :available_ingredients
   has_many :pantry_ingredients
+  has_many :recipes
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

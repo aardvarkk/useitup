@@ -2,7 +2,7 @@
 
 <p>
   <b>User:</b>
-  <%= @recipe.user_id %>
+  <%= @recipe.user.email %>
 </p>
 
 <p>
@@ -10,6 +10,20 @@
   <%= @recipe.name %>
 </p>
 
+<table>
+  <tr>
+    <th>Quantity</th>
+    <th>Measure</th>
+    <th>Ingredient</th>
+  </tr>
+<% @recipe.recipe_ingredients.each do |i| %>
+  <tr>
+    <td><%= i.qty %></td>
+    <td><%= i.measure_type.name %></td>
+    <td><%= i.ingredient.name %></td>
+  </tr>
+<% end %>
+</table>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>
