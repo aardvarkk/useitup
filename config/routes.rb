@@ -11,6 +11,8 @@ Useitup::Application.routes.draw do
     resources :pantry_ingredients, :only => [:new, :create, :destroy]
   end
 
+  resources :measure_types
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
