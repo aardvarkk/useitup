@@ -11,7 +11,7 @@
 
 <% @recipes.each do |recipe| %>
   <tr>
-    <td><%= recipe.user.email %></td>
+    <td><%= link_to recipe.user.email, recipe.user %></td>
     <td><%= recipe.name %></td>
     <td><%= link_to 'Show', recipe %></td>
     <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>

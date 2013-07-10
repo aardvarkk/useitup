@@ -7,14 +7,16 @@ Useitup::Application.routes.draw do
   resources :measure_conversions
   resources :measure_types
   resources :pantry_ingredients, :only => [:new, :create, :destroy]
-  resources :recipes
-  resources :recipe_ingredients
-  resources :recipe_steps
-  resources :users do
-    member do
-      get 'search'
+  
+  resources :recipes do
+    resources :recipe_ingredients, :only => [:new, :create, :destroy]
+    resources :recipe_steps
+    collection do
+      get 'suggest'
     end
   end
+
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

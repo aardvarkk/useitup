@@ -9,15 +9,18 @@
     <th>Quantity</th>
     <th>Measure</th>
     <th>Ingredient</th>
+    <th></th>
   </tr>
 <% @recipe.recipe_ingredients.each do |i| %>
   <tr>
     <td><%= i.qty %></td>
     <td><%= i.measure_type.name %></td>
     <td><%= i.ingredient.name %></td>
+    <td><%= button_to 'Remove', recipe_recipe_ingredient_path(@recipe, i.id), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
+<%= link_to 'Add Ingredient', new_recipe_recipe_ingredient_path(@recipe) %>
 
 <h3>Steps</h3>
 <ol>
