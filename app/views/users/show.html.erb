@@ -31,7 +31,7 @@
   <% end %>
 </table>
 <%= link_to 'Add Ingredient', new_pantry_ingredient_path %>
-<h1><%= link_to 'Search', 
+<h1><%= link_to 'Search', suggest_recipes_path %></h1>
 <h1>My Recipes</h1>
 <ul>
   <% current_user.recipes.each do |r| %>
