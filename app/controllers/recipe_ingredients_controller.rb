@@ -1,6 +1,6 @@
 class RecipeIngredientsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!
   
   # GET /recipe_ingredients/new
   # GET /recipe_ingredients/new.json

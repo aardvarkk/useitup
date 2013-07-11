@@ -14,7 +14,8 @@ class AvailableIngredientsController < ApplicationController
   end
 
   def destroy
-    AvailableIngredient.where(params[:available_ingredient]).destroy_all
+    @available_ingredient = AvailableIngredient.find(params[:id])
+    @available_ingredient.destroy
     redirect_to current_user
   end
 

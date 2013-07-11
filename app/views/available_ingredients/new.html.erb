@@ -1,6 +1,6 @@
 <%= link_to 'Back', current_user %>
 
-<%= form_for @available_ingredient do |a| %>
+<%= form_for :available_ingredient do |a| %>
   
   <%= a.label :ingredient_id %><br />
   <%= a.select :ingredient_id, options_from_collection_for_select(Ingredient.all, :id, :name) %><br />

@@ -14,7 +14,8 @@ class PantryIngredientsController < ApplicationController
   end
 
   def destroy
-    PantryIngredient.where(params[:pantry_ingredient]).destroy_all
+    @pantry_ingredient = PantryIngredient.find(params[:id])
+    @pantry_ingredient.destroy
     redirect_to current_user
   end
   

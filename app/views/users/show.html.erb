@@ -12,11 +12,11 @@
     <td><%= a.qty %></td>
     <td><%= a.measure_type.name %></td>
     <td><%= a.ingredient.name %></td>
-    <td><%= button_to 'Remove', available_ingredient_path(a.id), :method => :delete %></td>
+    <td><%= button_to 'Remove', user_available_ingredient_path(current_user, a.id), :method => :delete %></td>
   </tr>
   <% end %>
 </table>
-<%= link_to 'Add Ingredient', new_available_ingredient_path %>
+<%= link_to 'Add Ingredient', new_user_available_ingredient_path(current_user) %>
 <h1>Pantry Ingredients</h1>
 <table>
   <tr>
@@ -26,12 +26,12 @@
   <% @pantry.each do |p| %>
   <tr>
     <td><%= p.ingredient.name %></td>
-    <td><%= button_to 'Remove', pantry_ingredient_path(p.id), :method => :delete %></td>
+    <td><%= button_to 'Remove', user_pantry_ingredient_path(current_user, p.id), :method => :delete %></td>
   </tr>
   <% end %>
 </table>
-<%= link_to 'Add Ingredient', new_pantry_ingredient_path %>
-<h1><%= link_to 'Search', suggest_recipes_path %></h1>
+<%= link_to 'Add Ingredient', new_user_pantry_ingredient_path(current_user) %>
+<h1><%= link_to 'Suggest', suggest_recipes_path %></h1>
 <h1>My Recipes</h1>
 <ul>
   <% current_user.recipes.each do |r| %>

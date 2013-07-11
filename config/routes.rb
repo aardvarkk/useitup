@@ -2,11 +2,9 @@ Useitup::Application.routes.draw do
   
   devise_for :users
 
-  resources :available_ingredients, :only => [:new, :create, :destroy]
   resources :ingredients
   resources :measure_conversions
   resources :measure_types
-  resources :pantry_ingredients, :only => [:new, :create, :destroy]
   
   resources :recipes do
     resources :recipe_ingredients, :only => [:new, :create, :destroy]
@@ -16,7 +14,10 @@ Useitup::Application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    resources :available_ingredients, :only => [:new, :create, :destroy]
+    resources :pantry_ingredients, :only => [:new, :create, :destroy]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

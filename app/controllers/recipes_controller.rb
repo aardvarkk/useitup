@@ -130,7 +130,10 @@ private
       # Go through each of the ingredients in the recipe
       r.recipe_ingredients.each do |ri|
 
-        # If we don't have enough available and it's not in the pantry, we can'd make it!
+        # Convert recipe ingredient to required grams
+        g = ri.to_grams()
+
+        # If we don't have enough available and it's not in the pantry, we can't make it!
         if true
           scores << rand()
           break
