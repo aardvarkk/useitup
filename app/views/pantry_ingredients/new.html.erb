@@ -1,6 +1,6 @@
 <%= link_to 'Back', current_user %>
 
-<%= form_for :pantry_ingredient do |p| %>
+<%= form_for [current_user, @pantry_ingredient] do |p| %>
   <%= p.select :ingredient_id, options_from_collection_for_select(Ingredient.all, :id, :name) %>
   <div><%= submit_tag 'Add Ingredient' %></div>
 <% end %>
