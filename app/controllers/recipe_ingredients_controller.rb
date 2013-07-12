@@ -17,8 +17,9 @@ class RecipeIngredientsController < ApplicationController
   # POST /recipe_ingredients
   # POST /recipe_ingredients.json
   def create
+    @recipe = Recipe.find(params[:recipe_id])
     @recipe_ingredient = RecipeIngredient.new(params[:recipe_ingredient])
-    @recipe_ingredient.recipe = Recipe.find(params[:recipe_id])
+    @recipe_ingredient.recipe = @recipe
 
     respond_to do |format|
       if @recipe_ingredient.save
