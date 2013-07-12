@@ -7,6 +7,7 @@
     <th>Quantity</th>
     <th>Measure</th>
     <th>Ingredient</th>
+    <th>Grams</th>
     <th></th>
   </tr>
 <% @recipe.recipe_ingredients.each do |i| %>
@@ -14,6 +15,7 @@
     <td><%= i.qty %></td>
     <td><%= i.measure_type.name %></td>
     <td><%= i.ingredient.name %></td>
+    <td><%= i.grams %></td>
     <td><%= button_to 'Remove', recipe_recipe_ingredient_path(@recipe, i.id), :method => :delete %></td>
   </tr>
 <% end %>

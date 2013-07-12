@@ -5,6 +5,7 @@
     <th>Quantity</th>
     <th>Measure</th>
     <th>Ingredient</th>
+    <th>Grams</th>
     <th></th>
   </tr>
   <% @available.each do |a| %>
@@ -12,6 +13,7 @@
     <td><%= a.qty %></td>
     <td><%= a.measure_type.name %></td>
     <td><%= a.ingredient.name %></td>
+    <td><%= a.grams %></td>
     <td><%= button_to 'Remove', user_available_ingredient_path(current_user, a.id), :method => :delete %></td>
   </tr>
   <% end %>
