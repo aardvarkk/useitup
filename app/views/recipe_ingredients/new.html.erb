@@ -19,7 +19,7 @@
   </div>
   <div class="field">
     <%= f.label :measure_type_id %><br />
-    <%= collection_select(:recipe_ingredient, :measure_type_id, MeasureType.all, :id, :name) %>
+    <%= collection_select(:recipe_ingredient, :measure_type_id, MeasureType.in_order, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :qty %><br />
@@ -30,4 +30,4 @@
   </div>
 <% end %>
 
-<%= link_to 'Back', recipe_recipe_ingredients_path %>
+<%= link_to 'Back', @recipe %>

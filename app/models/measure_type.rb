@@ -1,6 +1,6 @@
 class MeasureType < ActiveRecord::Base
   has_many :measure_conversions
-  attr_accessible :name
+  attr_accessible :name, :multiplier, :volumetric
 
   # Return measure types in alphabetical order, but with grams first
   def self.in_order

@@ -15,7 +15,7 @@
     <td><%= i.qty %></td>
     <td><%= i.measure_type.name %></td>
     <td><%= i.ingredient.name %></td>
-    <td><%= i.grams %></td>
+    <td><%= i.in_grams %></td>
     <td><%= button_to 'Remove', recipe_recipe_ingredient_path(@recipe, i.id), :method => :delete %></td>
   </tr>
 <% end %>

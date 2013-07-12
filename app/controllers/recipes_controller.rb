@@ -143,10 +143,12 @@ private
       # Go through each of the ingredients in the recipe
       r.recipe_ingredients.each do |ri|
 
+        req = ri.in_grams
+
         # Do we have any of this ingredient available?
         avl = 0
         available.each do |ai|
-          avl = ai.grams if ai.ingredient_id == ri.ingredient_id
+          avl = ai.in_grams if ai.ingredient_id == ri.ingredient_id
         end
 
         # Is it in the pantry?
@@ -155,13 +157,13 @@ private
         end
 
         # Recipe is impossible, so we can stop looking at it
-        if avl < ri.grams
+        if avl < req
           result[:possible] = false
-          result[:missing][ri] = ri.grams - avl
-          result[:total_missing] += ri.grams - avl
+          result[:missing][ri] = req - avl
+          result[:total_missing] += req - avl
         else
-          result[:uses][ri] = ri.grams
-          result[:total_used] += ri.grams
+          result[:uses][ri] = req
+          result[:total_used] += req
         end
 
       end

@@ -13,7 +13,7 @@
     <td><%= a.qty %></td>
     <td><%= a.measure_type.name %></td>
     <td><%= a.ingredient.name %></td>
-    <td><%= a.grams %></td>
+    <td><%= a.in_grams %></td>
     <td><%= button_to 'Remove', user_available_ingredient_path(current_user, a.id), :method => :delete %></td>
   </tr>
   <% end %>
@@ -40,4 +40,8 @@
   <li><%= link_to r.name, r %></li>
   <% end %>
 </ul>
-<%= link_to 'Create Recipe', new_recipe_path %>
+<p>
+  <%= link_to 'Create Recipe', new_recipe_path %>
+</p>
+<%= link_to 'All Ingredients', ingredients_path %> |
+<%= link_to 'All Measure Types', measure_types_path %>
