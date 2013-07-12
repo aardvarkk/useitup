@@ -1,9 +1,12 @@
 <%#= debug @results %>
+
+<h1>Suggestions</h1>
 <ol>
-<% @results.each do |res| %>
+<% @suggestions.each do |res| %>
 <li>
 	<div>
-		<h1><%= res[:recipe].name %></h1>
+		<h2><%= res[:recipe].name %></h2>
+		<h3>Ingredients</h3>
 		<ul>
 			<% res[:uses].each do |i,a| %>
 			<li><span><%= i.ingredient.name %></span> - <span><%= a %>g</span></li>
@@ -13,4 +16,22 @@
 </li>
 <% end %>
 </ol>
+
+<h1>So close...</h1>
+<ol>
+<% @soclose.each do |res| %>
+<li>
+	<div>
+		<h2><%= res[:recipe].name %></h2>
+		<h3>Missing</h3>
+		<ul>
+			<% res[:missing].each do |i,a| %>
+			<li><span><%= i.ingredient.name %></span> - <span><%= a %>g</span></li>
+			<% end %>
+		</ul>
+	</div>
+</li>
+<% end %>
+</ol>
+
 <%= link_to 'Home', current_user %>

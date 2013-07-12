@@ -107,7 +107,12 @@ class RecipesController < ApplicationController
     @results = score_recipes(@recipes, current_user.available_ingredients, current_user.pantry_ingredients)
 
     # Order the results based on the score (highest first)
-    @results.sort_by!{ |r| r[:score] }.reverse!
+    @suggestions = @results.reject{ |r| !r[:possible] }
+    @suggestions.sort_by!{ |r| r[:score] }.reverse!
+
+    # Pick out things that are "so close" -- not possible, but 
+    @soclose = @results.reject{ |r| r[:possible] }
+    @soclose.sort_by!{ |r| r[:total_missing] }
 
   end
 
@@ -129,8 +134,11 @@ private
 
       result = {}
       result[:recipe] = r
-      result[:score] = 0
+      result[:possible] = true
       result[:uses] = {}
+      result[:total_used] = 0
+      result[:missing] = {}
+      result[:total_missing] = 0
 
       # Go through each of the ingredients in the recipe
       r.recipe_ingredients.each do |ri|
@@ -148,18 +156,21 @@ private
 
         # Recipe is impossible, so we can stop looking at it
         if avl < ri.grams
-          result[:score] = 0
-          break
+          result[:possible] = false
+          result[:missing][ri] = ri.grams - avl
+          result[:total_missing] += ri.grams - avl
+        else
+          result[:uses][ri] = ri.grams
+          result[:total_used] += ri.grams
         end
-
-        # Add to our score
-        result[:score] += ri.grams
-        result[:uses][ri] = ri.grams
 
       end
 
-      # Only add results which are possible to make
-      results << result if result[:score] > 0
+      # Calculate final score
+      result[:score] = (result[:possible] ? result[:total] : 0)
+
+      # Add everything -- we'll separate into groups later (suggestions, "so close")
+      results << result
 
     end
 
