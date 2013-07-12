@@ -3,9 +3,7 @@ class AvailableIngredientsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    @available_ingredient = AvailableIngredient.create(params[:available_ingredient])
-    @available_ingredient.user_id = current_user
-    current_user.available_ingredients << @available_ingredient
+    @available_ingredient = current_user.available_ingredients.build(params[:available_ingredient])
 
     respond_to do |format|
       if @available_ingredient.save
@@ -19,7 +17,7 @@ class AvailableIngredientsController < ApplicationController
   end
 
   def new
-    @available_ingredient = AvailableIngredient.new
+    @available_ingredient = current_user.available_ingredients.build
   end
 
   def destroy

@@ -15,7 +15,7 @@
   <% end %>
 
   <%= a.label :ingredient_id %><br />
-  <%= a.select :ingredient_id, options_from_collection_for_select(Ingredient.all, :id, :name) %><br />
+  <%= a.select :ingredient_id, options_from_collection_for_select(Ingredient.order(:name).all, :id, :name) %><br />
   
   <%= a.label :measure_type_id %><br />
   <%= a.select :measure_type_id, options_from_collection_for_select(MeasureType.in_order, :id, :name) %><br />

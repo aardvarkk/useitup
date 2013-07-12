@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :ingredient_id %><br />
-    <%= collection_select(:recipe_ingredient, :ingredient_id, Ingredient.all, :id, :name) %>
+    <%= collection_select(:recipe_ingredient, :ingredient_id, Ingredient.order(:name).all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :measure_type_id %><br />
