@@ -23,9 +23,9 @@
 <h3>Steps</h3>
 <ol>
 <% @recipe.recipe_steps.each do |s| %>
-  <li><%= s.step %></li>
+  <li><%= s.step %><td><%= button_to 'Remove', recipe_recipe_step_path(@recipe, s.id), :method => :delete %></td></li>
 <% end %>
 </ol>
-
+<p><%= link_to 'Add Step', new_recipe_recipe_step_path(@recipe) %></p>
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>

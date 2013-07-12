@@ -1,33 +1,12 @@
 class RecipeStepsController < ApplicationController
   
-  before_filter :authenticate_user!, :except => [:index, :show]
-
-  # GET /recipe_steps
-  # GET /recipe_steps.json
-  def index
-    @recipe_steps = RecipeStep.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @recipe_steps }
-    end
-  end
-
-  # GET /recipe_steps/1
-  # GET /recipe_steps/1.json
-  def show
-    @recipe_step = RecipeStep.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @recipe_step }
-    end
-  end
+  before_filter :authenticate_user!
 
   # GET /recipe_steps/new
   # GET /recipe_steps/new.json
   def new
-    @recipe_step = RecipeStep.new
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_step = @recipe.recipe_steps.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,17 +16,19 @@ class RecipeStepsController < ApplicationController
 
   # GET /recipe_steps/1/edit
   def edit
+    @recipe = Recipe.find(params[:recipe_id])
     @recipe_step = RecipeStep.find(params[:id])
   end
 
   # POST /recipe_steps
   # POST /recipe_steps.json
   def create
-    @recipe_step = RecipeStep.new(params[:recipe_step])
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_step = @recipe.recipe_steps.build(params[:recipe_step])
 
     respond_to do |format|
       if @recipe_step.save
-        format.html { redirect_to @recipe_step, notice: 'Recipe step was successfully created.' }
+        format.html { redirect_to @recipe, notice: 'Recipe step was successfully created.' }
         format.json { render json: @recipe_step, status: :created, location: @recipe_step }
       else
         format.html { render action: "new" }
@@ -79,7 +60,7 @@ class RecipeStepsController < ApplicationController
     @recipe_step.destroy
 
     respond_to do |format|
-      format.html { redirect_to recipe_steps_url }
+      format.html { redirect_to @recipe_step.recipe }
       format.json { head :no_content }
     end
   end

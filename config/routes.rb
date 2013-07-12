@@ -8,7 +8,7 @@ Useitup::Application.routes.draw do
   
   resources :recipes do
     resources :recipe_ingredients, :only => [:new, :create, :destroy]
-    resources :recipe_steps
+    resources :recipe_steps, :only => [:new, :create, :destroy, :edit, :update]
     collection do
       get 'suggest'
     end
