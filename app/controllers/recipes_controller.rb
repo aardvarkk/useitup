@@ -101,13 +101,13 @@ class RecipesController < ApplicationController
     # Assuming nothing is deleted, we can use this method
     # If records start being deleted, we need to start "oversampling"
     # in order to get a decent number of returned records
-    @to_score = Recipe.where(:id => make_rand_ids(Recipe.first.id..Recipe.last.id, SEARCH_SIZE)).order('random()').limit(SEARCH_RESULTS)
+    @recipes = Recipe.where(:id => make_rand_ids(Recipe.first.id..Recipe.last.id, SEARCH_SIZE)).order('random()').limit(SEARCH_RESULTS)
 
-    # Score them all, and then sort by the scores
-    @scores = score_recipes(@to_score, current_user.available_ingredients, current_user.pantry_ingredients)
+    # Score all the recipes, and see if they're possible
+    @results = score_recipes(@recipes, current_user.available_ingredients, current_user.pantry_ingredients)
 
-    # Order the recipes based on the score
-    @scored = @scores.sort.each_with_index.map{ |s,i| @to_score[i] if s > 0 }.reverse
+    # Order the results based on the score (highest first)
+    @results.sort_by!{ |r| r[:score] }.reverse!
 
   end
 
@@ -122,27 +122,49 @@ private
   end
 
   def score_recipes(recipes, available, pantry)
-    scores = []
+    results = []
 
     # Generate a score based on how much of our available ingredients we use
     recipes.each do |r|
 
+      result = {}
+      result[:recipe] = r
+      result[:score] = 0
+      result[:uses] = {}
+
       # Go through each of the ingredients in the recipe
       r.recipe_ingredients.each do |ri|
 
-        # Convert recipe ingredient to required grams
-        g = ri.to_grams()
+        # Do we have any of this ingredient available?
+        avl = 0
+        available.each do |ai|
+          avl = ai.grams if ai.ingredient_id == ri.ingredient_id
+        end
 
-        # If we don't have enough available and it's not in the pantry, we can't make it!
-        if true
-          scores << rand()
+        # Is it in the pantry?
+        pantry.each do |pi|
+          avl = Float::INFINITY if pi.ingredient_id == ri.ingredient_id
+        end
+
+        # Recipe is impossible, so we can stop looking at it
+        if avl < ri.grams
+          result[:score] = 0
           break
         end
+
+        # Add to our score
+        result[:score] += ri.grams
+        result[:uses][ri] = ri.grams
+
       end
+
+      # Only add results which are possible to make
+      results << result if result[:score] > 0
 
     end
 
-    return scores
+    return results
+
   end
 
 end

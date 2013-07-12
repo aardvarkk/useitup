@@ -1,3 +1,16 @@
-<%= debug @to_score %>
-<%= debug @scores %>
-<%= debug @scored %>
+<%#= debug @results %>
+<ol>
+<% @results.each do |res| %>
+<li>
+	<div>
+		<h1><%= res[:recipe].name %></h1>
+		<ul>
+			<% res[:uses].each do |i,a| %>
+			<li><span><%= i.ingredient.name %></span> - <span><%= a %>g</span></li>
+			<% end %>
+		</ul>
+	</div>
+</li>
+<% end %>
+</ol>
+<%= link_to 'Home', current_user %>
