@@ -2,6 +2,18 @@
 
 <%= form_for [current_user, @available_ingredient] do |a| %>
   
+  <% if @available_ingredient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@available_ingredient.errors.count, "error") %> prohibited this recipe_ingredient from being saved:</h2>
+
+      <ul>
+      <% @available_ingredient.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= a.label :ingredient_id %><br />
   <%= a.select :ingredient_id, options_from_collection_for_select(Ingredient.all, :id, :name) %><br />
   

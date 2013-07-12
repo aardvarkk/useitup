@@ -5,7 +5,7 @@ class AvailableIngredient < ActiveRecord::Base
 
   attr_accessible :qty, :ingredient_id, :measure_type_id
 
-  before_save :convert_to_grams
+  validate :convert_to_grams
 
   def convert_to_grams
   	# Is there a valid measure conversion?

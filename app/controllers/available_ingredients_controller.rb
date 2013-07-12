@@ -3,10 +3,19 @@ class AvailableIngredientsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    a = AvailableIngredient.create(params[:available_ingredient])
-    a.user_id = current_user
-    current_user.available_ingredients << a
-    redirect_to current_user
+    @available_ingredient = AvailableIngredient.create(params[:available_ingredient])
+    @available_ingredient.user_id = current_user
+    current_user.available_ingredients << @available_ingredient
+
+    respond_to do |format|
+      if @available_ingredient.save
+        format.html { redirect_to current_user, notice: 'Recipe ingredient was successfully created.' }
+        format.json { render json: @available_ingredient, status: :created, location: @recipe_ingredient }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @available_ingredient.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def new
